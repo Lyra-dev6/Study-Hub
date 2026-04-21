@@ -1,0 +1,176 @@
+body {
+    background: linear-gradient(to right, #0f172a, #1e1b4b);
+    color: black;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 60px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#timer-card {
+    background-color: #FAF9F6;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#quotes-card {
+    background-color: #FAF9F6;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#todo-card {
+    background-color: #FAF9F6;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    height: 400px;
+}
+
+button {
+    margin: 5px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #ac7bc0;
+    color: white;
+}
+
+.buttons button:nth-child(1) {
+    background-color: #87CEEB;
+    color: black;
+}
+
+.buttons button:nth-child(1):hover {
+    background-color: #7BC6DD;
+    color: black;
+}
+
+.buttons button:nth-child(2) {
+    background-color: #FFB6C1;
+    color: black;
+}
+
+.buttons button:nth-child(2):hover {
+    background-color: #FFA6C9;
+    color: black;
+}
+
+.buttons button:nth-child(3) {
+    background-color: #FFFACD;
+    color: black;
+}
+
+.buttons button:nth-child(3):hover {
+    background-color: #FFF68F;
+    color: black;
+}
+
+#quotes-card button {
+    background-color: #A78BFA;
+    color: white;
+}
+
+#quotes-card button:hover {
+    background-color: #9370FF;
+    color: white;
+}
+
+#time {
+    font-size: 70px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+#quote {
+    font-size: 24px;
+    line-height: 1.6;
+    margin: 20px 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#task-list {
+    font-size: 18px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+input {
+    font-size: 18px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#todo-card button {
+    background-color: #E6E6FA;
+    color: black;
+}
+
+#todo-card button:hover {
+    background-color: #D8BFD8;
+    color: black;
+}
+
+.remove-btn {
+    margin-left: 10px;
+    padding: 4px 8px;
+    font-size: 14px;
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: #FF5252;
+}
