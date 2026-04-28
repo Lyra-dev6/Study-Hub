@@ -4,35 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-    <!-- Added Tailwind CDN -->
+   
     <script src="https://tailwindcss.com"></script>
+    <script src="https://jsdelivr.net"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-white">
+<body>
     <h1>Study Hub</h1>
     <div id="container">
-        <div id="timer-card" class="shadow-xl/20 p-6">
+        
+        <div id="streak-card" class="shadow-xl/20 transition duration-300 hover:scale-105" style="text-align: center; padding: 20px; margin-bottom: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+            <h2 style="margin: 0;">🔥 Streak: <span id="streak-count">0</span> Days</h2>
+        </div>
+
+        <div id="timer-card" class="shadow-xl/20">
             <h2>Pomodoro Timer</h2>
             <div id="time">25:00</div>
             <div class="buttons">
-                <!-- Combined buttons with hover:scale-110 -->
-                <button class="transition duration-300 ease-in-out hover:scale-110 bg-blue-500 px-4 py-2 rounded">Start</button>
-                <button class="transition duration-300 ease-in-out hover:scale-110 bg-yellow-500 px-4 py-2 rounded">Pause</button>
-                <button class="transition duration-300 ease-in-out hover:scale-110 bg-red-500 px-4 py-2 rounded">Reset</button>
+                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="startTimer()">Start</button>
+                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="pauseTimer()">Pause</button>
+                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="resetTimer()">Reset</button>
             </div>
         </div>
 
-        <div id="todo-card" class="shadow-xl/20 p-6 mt-4">
+        <div id="todo-card" class="shadow-xl/20">
             <h2>To-do List</h2>
-            <input type="text" placeholder="Add a new task" class="text-black p-1">
-            <button class="transition duration-300 ease-in-out hover:scale-110 bg-green-500 px-4 py-2 rounded">Add</button>
+            <input type="text" id="todo-input" placeholder="Add a new task">
+            <button class="transition duration-300 ease-in-out hover:scale-110" onclick="addTodo()">Add</button>
             <ul id="task-list"></ul>
         </div>
 
-        <div id="quotes-card" class="shadow-xl/20 p-6 mt-4">
+        <div id="quotes-card" class="shadow-xl/20">
             <h2>Motivational Quotes</h2>
             <p id="quote">Click the button for a new motivational quote!</p>
-            <button class="transition duration-300 ease-in-out hover:scale-110 bg-purple-500 px-4 py-2 rounded">New Quote</button>
+            <button class="transition duration-300 ease-in-out hover:scale-110" onclick="getQuote()">New Quote</button>
         </div>
     </div>
 

@@ -1,107 +1,83 @@
-// Pomodoro Timer Variables
-let timer;
-let timeLeft = 25 * 60; 
-let isRunning = false;
+let timeLeft = 25 * 60;
+let timerId = null;
 
-// DOM Elements
-const timeDisplay = document.getElementById('time');
-const startBtn = document.querySelector('.buttons button:nth-child(1)');
-const pauseBtn = document.querySelector('.buttons button:nth-child(2)');
-const resetBtn = document.querySelector('.buttons button:nth-child(3)');
-
-const taskInput = document.querySelector('#todo-card input');
-const addBtn = document.querySelector('#todo-card button');
-const taskList = document.getElementById('task-list');
-
-const quoteDisplay = document.getElementById('quote');
-const newQuoteBtn = document.querySelector('#quotes-card button');
-
-// Pomodoro Timer Functions
-function updateDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+function updateTimerDisplay() {
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('time').innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 function startTimer() {
-    if (!isRunning) {
-        isRunning = true;
-        timer = setInterval(() => {
-            timeLeft--;
-            updateDisplay();
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                alert('Pomodoro session complete!');
-                resetTimer();
-            }
-        }, 1000);
-    }
+    if (timerId) return;
+    timerId = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerId);
+            timerId = null;
+            // TRIGGER STREAK ON FINISH
+            updateStreak(); 
+            alert("Time's up! Great session.");
+        }
+    }, 1000);
 }
 
 function pauseTimer() {
-    clearInterval(timer);
-    isRunning = false;
+    clearInterval(timerId);
+    timerId = null;
 }
 
 function resetTimer() {
-    clearInterval(timer);
-    isRunning = false;
+    pauseTimer();
     timeLeft = 25 * 60;
-    updateDisplay();
+    updateTimerDisplay();
 }
 
-// Event Listeners for Timer
-startBtn.addEventListener('click', startTimer);
-pauseBtn.addEventListener('click', pauseTimer);
-resetBtn.addEventListener('click', resetTimer);
+function addTodo() {
+    const input = document.getElementById('todo-input');
+    if (!input.value) return;
+    
+    const li = document.createElement('li');
+    li.style = "list-style: none; margin-bottom: 10px; display: flex; justify-content: space-between;";
+    li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" style="color: red; background: none; border: none; cursor: pointer;">Done</button>`;
+    
+    document.getElementById('task-list').appendChild(li);
+    input.value = "";
+}
 
-// To-do List Functions
-function addTask() {
-    const taskText = taskInput.value.trim();
-    if (taskText) {
-        const li = document.createElement('li');
-        li.textContent = taskText;
+function getQuote() {
+    const quotes = [
+        "Focus on being productive, not busy.",
+        "Don't stop until you're proud.",
+        "Success is the sum of small efforts repeated.",
+        "Your future self will thank you."
+    ];
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('quote').innerText = `"${randomQuote}"`;
+}
+
+function updateStreak() {
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem('lastStudyDate');
+    let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
+
+    if (lastDate !== today) {
+        streak++;
+        localStorage.setItem('studyStreak', streak);
+        localStorage.setItem('lastStudyDate', today);
+        document.getElementById('streak-count').innerText = streak;
         
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.className = 'remove-btn';
-        removeBtn.addEventListener('click', () => {
-            taskList.removeChild(li);
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
         });
-        
-        li.appendChild(removeBtn);
-        taskList.appendChild(li);
-        taskInput.value = '';
     }
 }
 
-// Event Listener for To-do
-addBtn.addEventListener('click', addTask);
-taskInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        addTask();
-    }
-});
+// Show streak when the user opens the site
+window.onload = () => {
+    const streak = localStorage.getItem('studyStreak') || 0;
+    document.getElementById('streak-count').innerText = streak;
+};
 
-const quotes = [
-    "The only way to do great work is to love what you do. – Steve Jobs",
-    "Believe you can and you're halfway there. – Theodore Roosevelt",
-    "The future belongs to those who believe in the beauty of their dreams. – Eleanor Roosevelt",
-    "You miss 100% of the shots you don't take. – Wayne Gretzky",
-    "The best way to predict the future is to create it. – Peter Drucker",
-    "Keep your face always toward the sunshine—and shadows will fall behind you. – Walt Whitman",
-    "The only limit to our realization of tomorrow will be our doubts of today. – Franklin D. Roosevelt",
-    "Don't watch the clock; do what it does. Keep going. – Sam Levenson"
-];
-
-function getRandomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    quoteDisplay.textContent = quotes[randomIndex];
-}
-
-// Event Listener for Quotes
-newQuoteBtn.addEventListener('click', getRandomQuote);
-
-// Initialize
-updateDisplay();
-getRandomQuote();
