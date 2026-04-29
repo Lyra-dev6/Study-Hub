@@ -51,6 +51,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.03); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .card h2 {
@@ -68,6 +75,12 @@
             color: #0f172a; 
         }
 
+        button {
+            cursor: pointer; 
+            border: none;
+            transition: all 0.2s ease;
+        }
+
         .btn-group-row {
             display: flex;
             gap: 8px;
@@ -76,13 +89,17 @@
         }
 
         .btn-timer {
-            flex: 1; 
+            flex: 1;
             padding: 12px 5px;
             border-radius: 10px;
             font-weight: bold;
             color: white;
-            transition: 0.2s;
             font-size: 0.9rem;
+        }
+
+        .btn-timer:hover, .btn-add:hover, .btn-quote:hover {
+            filter: brightness(0.9); 
+            transform: translateY(-2px); 
         }
 
         .btn-start { background-color: #AEC6CF; }
@@ -98,14 +115,21 @@
             margin-top: 10px;
         }
 
-        .btn-quote { background-color: #A0DEEE; color: white; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: auto; }
+        .btn-quote { 
+            background-color: #A0DEEE; 
+            color: white; 
+            padding: 12px; 
+            border-radius: 10px; 
+            width: 100%; 
+            font-weight: bold; 
+            margin-top: auto; 
+        }
 
-        
         #progress-detail {
-            font-size: 1.3rem; 
-            font-weight: 700;   
+            font-size: 1.3rem;
+            font-weight: 700;
             color: #475569;
-            margin-top: auto;  
+            margin-top: auto;
             text-align: center;
         }
 
@@ -120,7 +144,7 @@
             transition: stroke-dashoffset 1s ease-in-out;
         }
 
-        input { border: 2px solid #e2e8f0; padding: 12px; border-radius: 10px; width: 100%; box-sizing: border-box; }
+        input { border: 2px solid #e2e8f0; padding: 12px; border-radius: 10px; width: 100%; box-sizing: border-box; color: #333; }
         #task-list { width: 100%; margin-top: 20px; }
         
         footer {
@@ -130,6 +154,8 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
         }
+        
+        footer a { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -182,6 +208,7 @@
     </footer>
 
     <script>
+      
         let timeLeft = 25 * 60;
         let timerId = null;
         const sessionsGoal = 4;
