@@ -4,56 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://tailwindcss.com"></script>
+    <script src="https://jsdelivr.net"></script>
+    <style>
+    
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 30px; font-weight: bold; }
+
+        #container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+        .card {
+            background: white !important;
+            color: #333 !important;
+            border-radius: 15px;
+            padding: 25px;
+            width: 300px; /* Original width */
+            min-height: 250px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .card:hover { transform: scale(1.05); }
+
+        .progress-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+        }
+        svg { transform: rotate(-90deg); width: 80px; height: 80px; }
+        circle { fill: none; stroke-width: 8; stroke-linecap: round; }
+        .bg-circle { stroke: #eee; }
+        .progress-circle {
+            stroke: #936ED4;
+            stroke-dasharray: 226;
+            stroke-dashoffset: 226;
+            transition: stroke-dashoffset 1s ease;
+        }
+        .percent-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* 5. Your Pastel Buttons */
+        .btn-start { background-color: #AEC6CF; color: white; padding: 10px 15px; border-radius: 8px; font-weight: bold; }
+        .btn-pause { background-color: #FFD1DC; color: white; padding: 10px 15px; border-radius: 8px; font-weight: bold; }
+        .btn-reset { background-color: #B39EB5; color: white; padding: 10px 15px; border-radius: 8px; font-weight: bold; }
+        .btn-add { background-color: #D1BFF9; color: white; padding: 5px 15px; border-radius: 8px; font-weight: bold; }
+        .btn-add:hover { background-color: #936ED4; }
+        .btn-quote { background-color: #A0DEEE; color: white; padding: 8px 15px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+
+        input { border: 1px solid #ddd; padding: 8px; border-radius: 5px; width: 70%; color: #333; }
+        #time { font-size: 3rem; font-weight: bold; margin: 15px 0; }
+        ul { text-align: left; padding: 0; list-style: none; margin-top: 10px; }
+        li { background: #f9f9f9; padding: 5px; border-radius: 5px; margin-bottom: 5px; display: flex; justify-content: space-between; }
+    </style>
 </head>
 <body>
 
-    <h1 class="main-title">Study Hub</h1>
+    <h1>Study Hub</h1>
 
     <div id="container">
-        <!-- Daily Goal Card -->
+        <!-- Goal Card -->
         <div class="card">
-            <h2>Daily Goal</h2>
+            <h2 class="text-xl font-bold">Daily Goal</h2>
             <div class="progress-container">
-                <svg viewBox="0 0 100 100">
-                    <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
-                    <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
+                <svg viewBox="0 0 80 80">
+                    <circle class="bg-circle" cx="40" cy="40" r="36"></circle>
+                    <circle class="progress-circle" id="circle-bar" cx="40" cy="40" r="36"></circle>
                 </svg>
-                <div id="percent-text" class="percent-display">0%</div>
+                <div id="percent-text" class="percent-text">0%</div>
             </div>
-            <p id="progress-detail" class="detail-text">0/4 sessions done</p>
+            <p id="progress-detail" class="text-xs text-gray-500">0/4 sessions done</p>
         </div>
 
         <!-- Timer Card -->
         <div class="card">
-            <h2>Pomodoro</h2>
+            <h2 class="text-xl font-bold">Pomodoro</h2>
             <div id="time">25:00</div>
-            <div class="button-group">
+            <div class="flex justify-center gap-2">
                 <button onclick="startTimer()" class="btn-start">Start</button>
                 <button onclick="pauseTimer()" class="btn-pause">Pause</button>
                 <button onclick="resetTimer()" class="btn-reset">Reset</button>
             </div>
         </div>
 
-        <!-- To-do List Card -->
+        
         <div class="card">
-            <h2>Tasks</h2>
-            <div class="input-group">
-                <input type="text" id="todo-input" placeholder="New task...">
+            <h2 class="text-xl font-bold">To-do List</h2>
+            <div class="flex gap-2 mt-4">
+                <input type="text" id="todo-input" placeholder="New task">
                 <button onclick="addTodo()" class="btn-add">+</button>
             </div>
             <ul id="task-list"></ul>
         </div>
 
-        <!-- Quotes Card -->
+        
         <div class="card">
-            <h2>Inspiration</h2>
-            <p id="quote">"Success starts with self-discipline."</p>
+            <h2 class="text-xl font-bold">Inspiration</h2>
+            <p id="quote" class="italic text-gray-600 mt-4">"Success starts with self-discipline."</p>
             <button onclick="getQuote()" class="btn-quote">New Quote</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
-    <script src="https://jsdelivr.net"></script>
+    <script>
+        let timeLeft = 25 * 60;
+        let timerId = null;
+        const sessionsGoal = 4;
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('time').innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerId) return;
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    updateProgress();
+                    alert("Session finished!");
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() { clearInterval(timerId); timerId = null; }
+        function resetTimer() { pauseTimer(); timeLeft = 25 * 60; updateTimerDisplay(); }
+
+        function updateProgress() {
+            let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
+            completed++;
+            localStorage.setItem('sessionsCompleted', completed);
+            renderCircle(completed);
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function renderCircle(completed) {
+            const circle = document.getElementById('circle-bar');
+            const percentText = document.getElementById('percent-text');
+            const detailText = document.getElementById('progress-detail');
+            let percentage = Math.min((completed / sessionsGoal) * 100, 100);
+            const offset = 226 - (percentage / 100 * 226);
+            if(circle) circle.style.strokeDashoffset = offset;
+            if(percentText) percentText.innerText = `${Math.round(percentage)}%`;
+            if(detailText) detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            if (!input.value) return;
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" style="color:red; font-weight:bold;">✕</button>`;
+            document.getElementById('task-list').appendChild(li);
+            input.value = "";
+        }
+
+        function getQuote() {
+            const quotes = ["Keep going!", "You're doing great!", "Focus on the goal.", "Stay consistent."];
+            document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+        }
+
+        window.onload = () => {
+            const completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
+            renderCircle(completed);
+        };
+    </script>
 </body>
 </html>
