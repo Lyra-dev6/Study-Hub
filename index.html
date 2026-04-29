@@ -4,48 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-   
     <script src="https://tailwindcss.com"></script>
-    <script src="https://jsdelivr.net"></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        
+        body {
+            background-color: #0f172a; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+            gap: 25px;
+            width: 100%;
+            max-width: 500px;       
+            padding: 40px 20px;
+        }
+
+        .card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        svg { transform: rotate(-90deg); width: 100px; height: 100px; }
+        circle { fill: none; stroke-width: 8; stroke-linecap: round; }
+        .bg-circle { stroke: rgba(255,255,255,0.1); }
+        .progress-circle {
+            stroke: #818cf8;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 70; 
+        }
+    </style>
 </head>
 <body>
-    <h1>Study Hub</h1>
+
+    <h1 class="mt-10 text-4xl font-bold tracking-tight">Study Hub</h1>
+    
     <div id="container">
         
-        <div id="streak-card" class="shadow-xl/20 transition duration-300 hover:scale-105" style="text-align: center; padding: 20px; margin-bottom: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
-            <h2 style="margin: 0;">🔥 Streak: <span id="streak-count">0</span> Days</h2>
+        <div id="progress-card" class="card transition duration-300 hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold mb-2">Daily Progress</h2>
+            <div class="progress-container">
+                <svg viewBox="0 0 100 100">
+                    <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
+                    <circle class="progress-circle" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center font-bold text-lg">75%</div>
+            </div>
+            <p class="text-sm opacity-50">Keep going, Aishah!</p>
         </div>
 
-        <div id="timer-card" class="shadow-xl/20">
-            <h2>Pomodoro Timer</h2>
-            <div id="time">25:00</div>
-            <div class="buttons">
-                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="startTimer()">Start</button>
-                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="pauseTimer()">Pause</button>
-                <button class="transition duration-300 ease-in-out hover:scale-110" onclick="resetTimer()">Reset</button>
+        
+        <div id="timer-card" class="card transition duration-300 hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold">Pomodoro Timer</h2>
+            <div id="time" class="text-5xl font-mono my-4">25:00</div>
+            <div class="flex justify-center gap-3">
+                <button class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition" onclick="startTimer()">Start</button>
+                <button class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition" onclick="pauseTimer()">Pause</button>
+                <button class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition" onclick="resetTimer()">Reset</button>
             </div>
         </div>
 
-        <div id="todo-card" class="shadow-xl/20">
-            <h2>To-do List</h2>
-            <input type="text" id="todo-input" placeholder="Add a new task">
-            <button class="transition duration-300 ease-in-out hover:scale-110" onclick="addTodo()">Add</button>
-            <ul id="task-list"></ul>
+        <div id="todo-card" class="card transition duration-300 hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold mb-4">Task List</h2>
+            <div class="flex gap-2">
+                <input type="text" id="todo-input" placeholder="What's next?" class="bg-white/5 border-none p-2 rounded-lg w-full text-white">
+                <button class="bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded-lg transition" onclick="addTodo()">Add</button>
+            </div>
+            <ul id="task-list" class="mt-4 text-left"></ul>
         </div>
 
-        <div id="quotes-card" class="shadow-xl/20">
-            <h2>Motivational Quotes</h2>
-            <p id="quote">Click the button for a new motivational quote!</p>
-            <button class="transition duration-300 ease-in-out hover:scale-110" onclick="getQuote()">New Quote</button>
+        <div id="quotes-card" class="card transition duration-300 hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold mb-2">Motivation</h2>
+            <p id="quote" class="italic opacity-80">"Your only limit is your mind."</p>
+            <button class="mt-4 text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition" onclick="getQuote()">Refresh Quote</button>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1);">
-        <p style="color: white; font-size: 20px; font-family: sans-serif;">
-            Built with ✨ by <a href="https://github.com" style="color: white; font-weight: bold; text-decoration: none;">Aishah</a>
-        </p>
+    <footer class="pb-10 opacity-50">
+        <p>Built with ✨ by <a href="#" class="font-bold border-b border-white/20">Aishah</a></p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

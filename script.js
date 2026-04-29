@@ -1,6 +1,8 @@
 let timeLeft = 25 * 60;
 let timerId = null;
 
+const sessionsGoal = 4; 
+
 function updateTimerDisplay() {
     const mins = Math.floor(timeLeft / 60);
     const secs = timeLeft % 60;
@@ -15,8 +17,8 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timerId);
             timerId = null;
-            // TRIGGER STREAK ON FINISH
-            updateStreak(); 
+            
+            updateProgress(); 
             alert("Time's up! Great session.");
         }
     }, 1000);
@@ -33,13 +35,45 @@ function resetTimer() {
     updateTimerDisplay();
 }
 
+function updateProgress() {
+    let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
+    completed++;
+    localStorage.setItem('sessionsCompleted', completed);
+    
+    renderCircle(completed);
+
+    // Still keeps the fun confetti!
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    }
+}
+
+function renderCircle(completed) {
+    const circle = document.querySelector('.progress-circle');
+    const percentText = document.querySelector('.absolute.inset-0.flex'); // Grabs the 75% text
+    const detailText = document.querySelector('.text-sm.opacity-50'); // Grabs the "Keep going" text
+
+    
+    let percentage = Math.min((completed / sessionsGoal) * 100, 100);
+    
+    const offset = 283 - (percentage / 100 * 283);
+    
+    circle.style.strokeDashoffset = offset;
+    percentText.innerText = `${Math.round(percentage)}%`;
+    detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
+}
+
 function addTodo() {
     const input = document.getElementById('todo-input');
     if (!input.value) return;
     
     const li = document.createElement('li');
-    li.style = "list-style: none; margin-bottom: 10px; display: flex; justify-content: space-between;";
-    li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" style="color: red; background: none; border: none; cursor: pointer;">Done</button>`;
+    li.className = "flex justify-between items-center mb-2 bg-white/5 p-2 rounded";
+    li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-400 text-sm hover:text-red-600">Done</button>`;
     
     document.getElementById('task-list').appendChild(li);
     input.value = "";
@@ -56,28 +90,7 @@ function getQuote() {
     document.getElementById('quote').innerText = `"${randomQuote}"`;
 }
 
-function updateStreak() {
-    const today = new Date().toDateString();
-    const lastDate = localStorage.getItem('lastStudyDate');
-    let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
-
-    if (lastDate !== today) {
-        streak++;
-        localStorage.setItem('studyStreak', streak);
-        localStorage.setItem('lastStudyDate', today);
-        document.getElementById('streak-count').innerText = streak;
-        
-        confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
-    }
-}
-
-// Show streak when the user opens the site
 window.onload = () => {
-    const streak = localStorage.getItem('studyStreak') || 0;
-    document.getElementById('streak-count').innerText = streak;
+    const completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
+    renderCircle(completed);
 };
-
