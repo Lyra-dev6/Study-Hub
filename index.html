@@ -46,24 +46,22 @@
             padding: 35px 25px;
             flex: 1;
             min-width: 250px;
-            min-height: 500px; 
+            min-height: 500px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            align-items: center; 
+            align-items: center;
         }
 
         .card:hover { transform: translateY(-12px); }
 
-        
         .card h2 {
-            font-size: 2.2rem; 
+            font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 20px;
             color: #0f172a;
             text-align: center;
-            width: 100%;
         }
 
         #time { 
@@ -72,14 +70,13 @@
             margin: 25px 0; 
             color: #0f172a; 
             text-align: center;
-            width: 100%;
         }
 
-        .btn-start { background-color: #AEC6CF; color: white; padding: 12px; border-radius: 10px; font-weight: bold; width: 100%; margin-bottom: 8px;}
+    
+        .btn-start { background-color: #AEC6CF; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
         .btn-pause { background-color: #FFD1DC; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
         .btn-reset { background-color: #B39EB5; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
         
-       
         .btn-add { 
             background-color: #D1BFF9; 
             color: white; 
@@ -88,11 +85,19 @@
             font-weight: bold; 
             margin-top: 10px;
             transition: 0.3s;
-            width: fit-content; 
         }
         .btn-add:hover { background-color: #936ED4; }
 
         .btn-quote { background-color: #A0DEEE; color: white; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: auto; }
+
+    
+        #progress-detail {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #475569;
+            margin-top: auto;
+            text-align: center;
+        }
 
         .progress-container { position: relative; width: 110px; height: 110px; margin: 20px auto; }
         svg { transform: rotate(-90deg); width: 110px; height: 110px; }
@@ -105,7 +110,6 @@
             transition: stroke-dashoffset 1s ease-in-out;
         }
 
-        
         input { 
             border: 2px solid #e2e8f0; 
             padding: 12px; 
@@ -141,19 +145,17 @@
                 </svg>
                 <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl">0%</div>
             </div>
-            <p id="progress-detail" class="text-sm text-gray-400 mt-auto">0/4 sessions done</p>
+            <p id="progress-detail">0/4 sessions done</p>
         </div>
 
         <!-- Timer Card -->
         <div class="card">
             <h2>Pomodoro</h2>
             <div id="time">25:00</div>
-            <div class="w-full">
+            <div class="flex gap-2 w-full mt-auto">
                 <button onclick="startTimer()" class="btn-start">Start</button>
-                <div class="flex gap-2">
-                    <button onclick="pauseTimer()" class="btn-pause">Pause</button>
-                    <button onclick="resetTimer()" class="btn-reset">Reset</button>
-                </div>
+                <button onclick="pauseTimer()" class="btn-pause">Pause</button>
+                <button onclick="resetTimer()" class="btn-reset">Reset</button>
             </div>
         </div>
 
@@ -168,7 +170,7 @@
         <!-- Quote Card -->
         <div class="card">
             <h2>Motivation</h2>
-            <p id="quote" class="italic text-gray-500 text-lg leading-relaxed mt-4">"Success is built on small daily wins."</p>
+            <p id="quote" class="italic text-gray-500 text-lg leading-relaxed mt-4 text-center">"Success is built on small daily wins."</p>
             <button onclick="getQuote()" class="btn-quote">New Quote</button>
         </div>
     </div>
@@ -228,12 +230,9 @@
             const input = document.getElementById('todo-input');
             const list = document.getElementById('task-list');
             if (!input.value) return;
-            
             const li = document.createElement('li');
             li.className = "flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-100";
             li.innerHTML = `<span class="font-medium text-gray-700">${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-400 font-bold hover:text-red-600 transition">✕</button>`;
-            
-            // INSERTS AT THE TOP
             list.insertBefore(li, list.firstChild);
             input.value = "";
         }
@@ -250,3 +249,4 @@
     </script>
 </body>
 </html>
+
