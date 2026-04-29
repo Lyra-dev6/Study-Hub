@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-
     <script src="https://tailwindcss.com"></script>
-    
     <script src="https://jsdelivr.net"></script>
     
     <style>
+    
         body {
-            background-color: #0a0f1d; /* Deeper background makes cards glow */
-            color: white;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #0a0f1d; /* Deep dark background so white cards pop */
+            color: #333; /* Darker text for readability on white cards */
+            font-family: sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -22,13 +21,10 @@
         }
 
         h1 {
+            color: white;
             margin-top: 40px;
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
         }
 
 
@@ -37,88 +33,78 @@
             flex-direction: row; 
             flex-wrap: wrap;     
             justify-content: center;
-            align-items: stretch;
             gap: 20px;
             padding: 40px 20px;
             width: 100%;
-            max-width: 1400px;
-            box-sizing: border-box;
+            max-width: 1300px;
         }
-
 
         .card {
             flex: 1;
             min-width: 280px;
             max-width: 320px;
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(12px);          
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 30px 20px;
+            background: white !important; /* Forces solid white */
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        .card h2 {
+            color: #1a1a1a;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e5e7eb;
+            transform: scale(1.05);
+        }
+
+        .btn-add {
+            background-color: #4f46e5;
+            color: white;
         }
 
         .progress-container {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 20px auto;
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
         }
-        svg { transform: rotate(-90deg); width: 120px; height: 120px; }
+        svg { transform: rotate(-90deg); width: 100px; height: 100px; }
         circle { fill: none; stroke-width: 8; stroke-linecap: round; }
-        .bg-circle { stroke: rgba(255,255,255,0.05); }
+        .bg-circle { stroke: #f3f4f6; }
         .progress-circle {
-            stroke: #818cf8;
-            stroke-dasharray: 283; 
-            stroke-dashoffset: 283; 
-            transition: stroke-dashoffset 1.5s ease-in-out;
-            filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.6));
+            stroke: #4f46e5;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease-in-out;
         }
-
-        
-        .btn {
-            background: rgba(255,255,255,0.1);
-            padding: 10px 15px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        .btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
-        .btn-primary { background: #818cf8; }
-        .btn-primary:hover { background: #6366f1; }
 
         input {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 10px;
-            color: white;
-            outline: none;
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 6px;
             width: 100%;
-        }
-
-        #task-list li {
-            background: rgba(255,255,255,0.03);
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -127,48 +113,46 @@
     <h1>Study Hub</h1>
 
     <div id="container">
-    
-        <div id="progress-card" class="card">
-            <h2 class="text-xl font-bold">Daily Goal</h2>
+        
+        <div class="card">
+            <h2>Daily Goal</h2>
             <div class="progress-container">
                 <svg viewBox="0 0 100 100">
                     <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
                     <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
                 </svg>
-                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl">0%</div>
+                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-bold text-lg">0%</div>
             </div>
-            <p id="progress-detail" class="text-sm opacity-50">0/4 sessions completed</p>
+            <p id="progress-detail" class="text-xs text-gray-500 mt-2">0/4 sessions completed</p>
         </div>
 
-        <div id="timer-card" class="card">
-            <h2 class="text-xl font-bold">Timer</h2>
-            <div id="time" class="text-6xl font-mono my-6">25:00</div>
-            <div class="flex justify-center gap-3">
-                <button onclick="startTimer()" class="btn">Start</button>
-                <button onclick="pauseTimer()" class="btn">Pause</button>
-                <button onclick="resetTimer()" class="btn">Reset</button>
+    
+            <h2>Pomodoro Timer</h2>
+            <div id="time" class="text-5xl font-bold my-4">25:00</div>
+            <div class="flex justify-center gap-2">
+                <button onclick="startTimer()">Start</button>
+                <button onclick="pauseTimer()">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
             </div>
         </div>
 
-        <div id="todo-card" class="card">
-            <h2 class="text-xl font-bold mb-4">Tasks</h2>
+    
+        <div class="card">
+            <h2>To-do List</h2>
             <div class="flex gap-2">
-                <input type="text" id="todo-input" placeholder="Add a mission...">
-                <button onclick="addTodo()" class="btn btn-primary">+</button>
+                <input type="text" id="todo-input" placeholder="Add task...">
+                <button onclick="addTodo()" class="btn-add">+</button>
             </div>
-            <ul id="task-list" class="mt-4 text-left overflow-y-auto max-h-[150px]"></ul>
+            <ul id="task-list" class="mt-4 text-left text-sm space-y-2"></ul>
         </div>
 
-        <div id="quotes-card" class="card">
-            <h2 class="text-xl font-bold">Vibe</h2>
-            <p id="quote" class="italic opacity-80 my-4 px-2">"Push yourself, because no one else is going to do it for you."</p>
-            <button onclick="getQuote()" class="text-indigo-400 text-xs font-bold uppercase tracking-widest hover:text-indigo-300">New Quote</button>
+    
+        <div class="card">
+            <h2>Motivation</h2>
+            <p id="quote" class="italic text-gray-600">"Your only limit is your mind."</p>
+            <button onclick="getQuote()" class="mt-4 text-xs text-indigo-600 border-none bg-transparent hover:bg-transparent">New Quote</button>
         </div>
     </div>
-
-    <footer class="mt-auto py-10 opacity-30 text-sm">
-        Built with ✨ by <a href="#" class="hover:underline">Aishah</a>
-    </footer>
 
     <script>
         let timeLeft = 25 * 60;
@@ -190,7 +174,7 @@
                     clearInterval(timerId);
                     timerId = null;
                     updateProgress();
-                    alert("Session Complete! Take a break.");
+                    alert("Great job! Session complete.");
                 }
             }, 1000);
         }
@@ -211,18 +195,15 @@
             completed++;
             localStorage.setItem('sessionsCompleted', completed);
             renderCircle(completed);
-            
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         }
 
         function renderCircle(completed) {
             const circle = document.getElementById('circle-bar');
             const percentText = document.getElementById('percent-text');
             const detailText = document.getElementById('progress-detail');
-
             let percentage = Math.min((completed / sessionsGoal) * 100, 100);
             const offset = 283 - (percentage / 100 * 283);
-            
             circle.style.strokeDashoffset = offset;
             percentText.innerText = `${Math.round(percentage)}%`;
             detailText.innerText = `${completed}/${sessionsGoal} sessions completed`;
@@ -231,25 +212,17 @@
         function addTodo() {
             const input = document.getElementById('todo-input');
             if (!input.value) return;
-            
             const li = document.createElement('li');
-            li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-600">✕</button>`;
+            li.className = "flex justify-between items-center p-2 bg-gray-50 rounded";
+            li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-500 border-none bg-transparent p-0">✕</button>`;
             document.getElementById('task-list').appendChild(li);
             input.value = "";
         }
 
         function getQuote() {
-            const quotes = [
-                "Focus on being productive, not busy.",
-                "Don't stop until you're proud.",
-                "Success is the sum of small efforts repeated.",
-                "Your future self will thank you.",
-                "Dream big. Work hard. Stay focused."
-            ];
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            document.getElementById('quote').innerText = `"${randomQuote}"`;
+            const quotes = ["Success is daily.", "Do it now.", "Keep pushing.", "Stay focused."];
+            document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
         }
-
 
         window.onload = () => {
             const completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
@@ -258,5 +231,3 @@
     </script>
 </body>
 </html>
-
- 
