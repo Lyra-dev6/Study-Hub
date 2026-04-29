@@ -17,21 +17,12 @@ function startTimer() {
             clearInterval(timerId);
             timerId = null;
             updateProgress();
-            alert("Session complete!");
         }
     }, 1000);
 }
 
-function pauseTimer() { 
-    clearInterval(timerId); 
-    timerId = null; 
-}
-
-function resetTimer() {
-    pauseTimer();
-    timeLeft = 25 * 60;
-    updateTimerDisplay();
-}
+function pauseTimer() { clearInterval(timerId); timerId = null; }
+function resetTimer() { pauseTimer(); timeLeft = 25 * 60; updateTimerDisplay(); }
 
 function updateProgress() {
     let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
@@ -47,23 +38,22 @@ function renderCircle(completed) {
     const detailText = document.getElementById('progress-detail');
     let percentage = Math.min((completed / sessionsGoal) * 100, 100);
     const offset = 283 - (percentage / 100 * 283);
-    if (circle) circle.style.strokeDashoffset = offset;
-    if (percentText) percentText.innerText = `${Math.round(percentage)}%`;
-    if (detailText) detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
+    circle.style.strokeDashoffset = offset;
+    percentText.innerText = `${Math.round(percentage)}%`;
+    detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
 }
 
 function addTodo() {
     const input = document.getElementById('todo-input');
     if (!input.value) return;
     const li = document.createElement('li');
-    li.className = "flex justify-between items-center p-2 bg-gray-50 rounded";
-    li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-400 font-bold">✕</button>`;
+    li.innerHTML = `<span>${input.value}</span> <button onclick="this.parentElement.remove()" style="color:red; background:none; padding:0;">✕</button>`;
     document.getElementById('task-list').appendChild(li);
     input.value = "";
 }
 
 function getQuote() {
-    const quotes = ["Be better than yesterday.", "Focus on your goals.", "Work hard in silence.", "Never give up."];
+    const quotes = ["Success is a journey.", "Stay focused.", "You got this!"];
     document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
 }
 

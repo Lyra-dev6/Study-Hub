@@ -4,59 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-   
-    <script src="https://cdn.tailwindcss.com"></script>
-   
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1>Study Hub</h1>
+    <h1 class="main-title">Study Hub</h1>
 
     <div id="container">
-        
-        <div class="card shadow-xl">
-            <h2 class="text-xl font-bold">Daily Goal</h2>
+        <!-- Daily Goal Card -->
+        <div class="card">
+            <h2>Daily Goal</h2>
             <div class="progress-container">
                 <svg viewBox="0 0 100 100">
                     <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
                     <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
                 </svg>
-                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-bold text-lg text-gray-800">0%</div>
+                <div id="percent-text" class="percent-display">0%</div>
             </div>
-            <p id="progress-detail" class="text-xs text-gray-500">0/4 sessions done</p>
+            <p id="progress-detail" class="detail-text">0/4 sessions done</p>
         </div>
 
-        
-        <div id="timer-card" class="card shadow-xl">
-            <h2 class="text-xl font-bold">Pomodoro</h2>
+        <!-- Timer Card -->
+        <div class="card">
+            <h2>Pomodoro</h2>
             <div id="time">25:00</div>
-            <div class="flex justify-center gap-2">
+            <div class="button-group">
                 <button onclick="startTimer()" class="btn-start">Start</button>
                 <button onclick="pauseTimer()" class="btn-pause">Pause</button>
                 <button onclick="resetTimer()" class="btn-reset">Reset</button>
             </div>
         </div>
 
-        
-        <div id="todo-card" class="card shadow-xl">
-            <h2 class="text-xl font-bold mb-4">Tasks</h2>
-            <div class="flex gap-2">
+        <!-- To-do List Card -->
+        <div class="card">
+            <h2>Tasks</h2>
+            <div class="input-group">
                 <input type="text" id="todo-input" placeholder="New task...">
                 <button onclick="addTodo()" class="btn-add">+</button>
             </div>
-            <ul id="task-list" class="mt-4 text-left text-sm space-y-2"></ul>
+            <ul id="task-list"></ul>
         </div>
 
-       
-        <div id="quotes-card" class="card shadow-xl">
-            <h2 class="text-xl font-bold">Inspiration</h2>
-            <p id="quote" class="italic text-gray-600 mt-4">"Success starts with self-discipline."</p>
-            <button onclick="getQuote()" class="btn-quote mt-6">New Quote</button>
+        <!-- Quotes Card -->
+        <div class="card">
+            <h2>Inspiration</h2>
+            <p id="quote">"Success starts with self-discipline."</p>
+            <button onclick="getQuote()" class="btn-quote">New Quote</button>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script src="https://jsdelivr.net"></script>
 </body>
 </html>
