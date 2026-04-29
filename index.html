@@ -48,13 +48,10 @@
             min-width: 250px;
             min-height: 500px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
-        .card:hover { transform: translateY(-12px); }
 
         .card h2 {
             font-size: 2.2rem;
@@ -69,14 +66,29 @@
             font-weight: 900; 
             margin: 25px 0; 
             color: #0f172a; 
-            text-align: center;
         }
 
-    
-        .btn-start { background-color: #AEC6CF; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
-        .btn-pause { background-color: #FFD1DC; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
-        .btn-reset { background-color: #B39EB5; color: white; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; }
-        
+        .btn-group-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .btn-timer {
+            flex: 1; 
+            padding: 12px 5px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-start { background-color: #AEC6CF; }
+        .btn-pause { background-color: #FFD1DC; }
+        .btn-reset { background-color: #B39EB5; }
+
         .btn-add { 
             background-color: #D1BFF9; 
             color: white; 
@@ -84,18 +96,16 @@
             border-radius: 10px; 
             font-weight: bold; 
             margin-top: 10px;
-            transition: 0.3s;
         }
-        .btn-add:hover { background-color: #936ED4; }
 
         .btn-quote { background-color: #A0DEEE; color: white; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: auto; }
 
-    
+        
         #progress-detail {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.3rem; 
+            font-weight: 700;   
             color: #475569;
-            margin-top: auto;
+            margin-top: auto;  
             text-align: center;
         }
 
@@ -110,15 +120,7 @@
             transition: stroke-dashoffset 1s ease-in-out;
         }
 
-        input { 
-            border: 2px solid #e2e8f0; 
-            padding: 12px; 
-            border-radius: 10px; 
-            width: 100%; 
-            color: #333; 
-            box-sizing: border-box; 
-        }
-
+        input { border: 2px solid #e2e8f0; padding: 12px; border-radius: 10px; width: 100%; box-sizing: border-box; }
         #task-list { width: 100%; margin-top: 20px; }
         
         footer {
@@ -135,7 +137,7 @@
     <h1 class="main-title">Study Hub</h1>
 
     <div id="container">
-        <!-- Daily Goal Card -->
+        <!-- Daily Goal -->
         <div class="card">
             <h2>Daily Goal</h2>
             <div class="progress-container">
@@ -148,18 +150,18 @@
             <p id="progress-detail">0/4 sessions done</p>
         </div>
 
-        <!-- Timer Card -->
+        <!-- Pomodoro -->
         <div class="card">
             <h2>Pomodoro</h2>
             <div id="time">25:00</div>
-            <div class="flex gap-2 w-full mt-auto">
-                <button onclick="startTimer()" class="btn-start">Start</button>
-                <button onclick="pauseTimer()" class="btn-pause">Pause</button>
-                <button onclick="resetTimer()" class="btn-reset">Reset</button>
+            <div class="btn-group-row">
+                <button onclick="startTimer()" class="btn-timer btn-start">Start</button>
+                <button onclick="pauseTimer()" class="btn-timer btn-pause">Pause</button>
+                <button onclick="resetTimer()" class="btn-timer btn-reset">Reset</button>
             </div>
         </div>
 
-        <!-- Tasks Card -->
+        <!-- To-do -->
         <div class="card">
             <h2>To-do List</h2>
             <input type="text" id="todo-input" placeholder="New task...">
@@ -167,10 +169,10 @@
             <ul id="task-list" class="text-left space-y-3"></ul>
         </div>
 
-        <!-- Quote Card -->
+        <!-- Motivation -->
         <div class="card">
             <h2>Motivation</h2>
-            <p id="quote" class="italic text-gray-500 text-lg leading-relaxed mt-4 text-center">"Success is built on small daily wins."</p>
+            <p id="quote" class="italic text-gray-500 text-lg leading-relaxed mt-4">"Success is built on small daily wins."</p>
             <button onclick="getQuote()" class="btn-quote">New Quote</button>
         </div>
     </div>
@@ -199,7 +201,7 @@
                     clearInterval(timerId);
                     timerId = null;
                     updateProgress();
-                    alert("Time is up! Great job.");
+                    alert("Time is up!");
                 }
             }, 1000);
         }
@@ -238,7 +240,7 @@
         }
 
         function getQuote() {
-            const quotes = ["Be better than yesterday.", "Focus on your goals.", "Success is a choice.", "Keep going!"];
+            const quotes = ["Be better than yesterday.", "Focus on your goals.", "Keep going!"];
             document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
         }
 
@@ -249,4 +251,3 @@
     </script>
 </body>
 </html>
-
