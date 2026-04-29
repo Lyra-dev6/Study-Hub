@@ -47,8 +47,8 @@
             border-radius: 20px;
             padding: 35px 25px;
             flex: 1; /* Forces 4 equal columns */
-            min-width: 250px;
-            min-height: 450px; /* Makes them longer */
+            min-width: 180px;
+            min-height: 450px; 
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
@@ -95,6 +95,26 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
         }
+
+@media screen and (max-width: 1400px) {
+    .main-title {
+        font-size: 3rem; 
+        margin-top: 30px;
+    }
+    #time {
+        font-size: 3rem; 
+    }
+    .card h2 {
+        font-size: 1.5rem; 
+    }
+    #container {
+        gap: 15px; 
+        padding: 30px 15px;
+    }
+    .card {
+        padding: 25px 15px;
+    }
+}
     </style>
 </head>
 <body>
