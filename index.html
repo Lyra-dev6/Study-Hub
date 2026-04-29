@@ -4,101 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
-    <script src="https://tailwindcss.com"></script>
-    <style>
-       
-        body {
-            background-color: #0a0f1d !important;
-            color: white !important;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        #container {
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: center !important;
-            align-items: flex-start !important;
-            gap: 20px !important;
-            padding: 50px 20px !important;
-            width: 100% !important;
-            max-width: 1400px !important;
-        }
-
-        .card {
-            flex: 1 !important;
-            min-width: 250px !important;
-            max-width: 320px !important;
-            background: rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 20px !important;
-            padding: 25px !important;
-            text-align: center !important;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .progress-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 15px auto;
-        }
-        svg { transform: rotate(-90deg); width: 100px; height: 100px; }
-        circle { fill: none; stroke-width: 8; stroke-linecap: round; }
-        .bg-circle { stroke: rgba(255,255,255,0.1); }
-        .progress-circle {
-            stroke: #818cf8;
-            stroke-dasharray: 283;
-            stroke-dashoffset: 70;
-        }
-    </style>
+   
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1 class="text-4xl font-bold mt-10">Study Hub</h1>
+    <h1>Study Hub</h1>
 
     <div id="container">
-    
-        <div class="card">
-            <h2 class="text-lg font-semibold">Goal</h2>
+        
+        <div class="card shadow-xl">
+            <h2 class="text-xl font-bold">Daily Goal</h2>
             <div class="progress-container">
                 <svg viewBox="0 0 100 100">
                     <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
-                    <circle class="progress-circle" cx="50" cy="50" r="45"></circle>
+                    <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
                 </svg>
-                <div class="absolute inset-0 flex items-center justify-center font-bold">75%</div>
+                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-bold text-lg text-gray-800">0%</div>
             </div>
-            <p class="text-xs opacity-50">3/4 Sessions</p>
+            <p id="progress-detail" class="text-xs text-gray-500">0/4 sessions done</p>
         </div>
 
-        <div class="card">
-            <h2 class="text-lg font-semibold">Timer</h2>
-            <div id="time" class="text-5xl font-bold my-5">25:00</div>
-            <div class="flex gap-2 justify-center">
-                <button class="bg-white/10 px-3 py-1 rounded">Start</button>
-                <button class="bg-white/10 px-3 py-1 rounded">Reset</button>
+        
+        <div id="timer-card" class="card shadow-xl">
+            <h2 class="text-xl font-bold">Pomodoro</h2>
+            <div id="time">25:00</div>
+            <div class="flex justify-center gap-2">
+                <button onclick="startTimer()" class="btn-start">Start</button>
+                <button onclick="pauseTimer()" class="btn-pause">Pause</button>
+                <button onclick="resetTimer()" class="btn-reset">Reset</button>
             </div>
         </div>
 
-
-        <div class="card">
-            <h2 class="text-lg font-semibold mb-4">Tasks</h2>
+        
+        <div id="todo-card" class="card shadow-xl">
+            <h2 class="text-xl font-bold mb-4">Tasks</h2>
             <div class="flex gap-2">
-                <input type="text" placeholder="Task..." class="bg-white/10 border-none rounded p-2 w-full text-white">
-                <button class="bg-indigo-500 px-3 rounded">+</button>
+                <input type="text" id="todo-input" placeholder="New task...">
+                <button onclick="addTodo()" class="btn-add">+</button>
             </div>
+            <ul id="task-list" class="mt-4 text-left text-sm space-y-2"></ul>
         </div>
 
-        <div class="card">
-            <h2 class="text-lg font-semibold">Vibe</h2>
-            <p class="italic text-sm mt-4">"Keep going, you're doing great!"</p>
+       
+        <div id="quotes-card" class="card shadow-xl">
+            <h2 class="text-xl font-bold">Inspiration</h2>
+            <p id="quote" class="italic text-gray-600 mt-4">"Success starts with self-discipline."</p>
+            <button onclick="getQuote()" class="btn-quote mt-6">New Quote</button>
         </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
