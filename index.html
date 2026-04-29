@@ -8,7 +8,7 @@
     <script src="https://jsdelivr.net"></script>
     <style>
         body {
-            background-color: #0f172a;
+            background-color: #0f172a !important;
             color: white;
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -51,13 +51,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
 
         .card:hover {
-            transform: translateY(-10px) scale(1.03); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: translateY(-15px) scale(1.05) !important; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6) !important;
+            cursor: default;
         }
 
         .card h2 {
@@ -68,71 +68,32 @@
             text-align: center;
         }
 
-        #time { 
-            font-size: 4.5rem; 
-            font-weight: 900; 
-            margin: 25px 0; 
-            color: #0f172a; 
-        }
+        #time { font-size: 4.5rem; font-weight: 900; margin: 25px 0; color: #0f172a; }
 
+       
         button {
-            cursor: pointer; 
+            cursor: pointer !important; 
             border: none;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease !important;
         }
 
-        .btn-group-row {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            margin-top: auto;
+        button:hover {
+            filter: brightness(0.8) !important; 
+            transform: scale(1.1) !important; 
         }
 
-        .btn-timer {
-            flex: 1;
-            padding: 12px 5px;
-            border-radius: 10px;
-            font-weight: bold;
-            color: white;
-            font-size: 0.9rem;
-        }
+        .btn-group-row { display: flex; gap: 8px; width: 100%; margin-top: auto; }
+        .btn-timer { flex: 1; padding: 12px 5px; border-radius: 10px; font-weight: bold; color: white; font-size: 0.9rem; }
 
-        .btn-timer:hover, .btn-add:hover, .btn-quote:hover {
-            filter: brightness(0.9); 
-            transform: translateY(-2px); 
-        }
+        .btn-start { background-color: #AEC6CF !important; }
+        .btn-pause { background-color: #FFD1DC !important; }
+        .btn-reset { background-color: #B39EB5 !important; }
+        .btn-add { background-color: #D1BFF9 !important; color: white; padding: 10px 30px; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+        .btn-quote { background-color: #A0DEEE !important; color: white; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: auto; }
 
-        .btn-start { background-color: #AEC6CF; }
-        .btn-pause { background-color: #FFD1DC; }
-        .btn-reset { background-color: #B39EB5; }
+        #progress-detail { font-size: 1.3rem; font-weight: 700; color: #475569; margin-top: auto; text-align: center; }
 
-        .btn-add { 
-            background-color: #D1BFF9; 
-            color: white; 
-            padding: 10px 30px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            margin-top: 10px;
-        }
-
-        .btn-quote { 
-            background-color: #A0DEEE; 
-            color: white; 
-            padding: 12px; 
-            border-radius: 10px; 
-            width: 100%; 
-            font-weight: bold; 
-            margin-top: auto; 
-        }
-
-        #progress-detail {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #475569;
-            margin-top: auto;
-            text-align: center;
-        }
-
+        /* PROGRESS CIRCLE */
         .progress-container { position: relative; width: 110px; height: 110px; margin: 20px auto; }
         svg { transform: rotate(-90deg); width: 110px; height: 110px; }
         circle { fill: none; stroke-width: 10; stroke-linecap: round; }
@@ -154,8 +115,6 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
         }
-        
-        footer a { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -163,7 +122,6 @@
     <h1 class="main-title">Study Hub</h1>
 
     <div id="container">
-        <!-- Daily Goal -->
         <div class="card">
             <h2>Daily Goal</h2>
             <div class="progress-container">
@@ -176,7 +134,6 @@
             <p id="progress-detail">0/4 sessions done</p>
         </div>
 
-        <!-- Pomodoro -->
         <div class="card">
             <h2>Pomodoro</h2>
             <div id="time">25:00</div>
@@ -187,15 +144,13 @@
             </div>
         </div>
 
-        <!-- To-do -->
         <div class="card">
             <h2>To-do List</h2>
             <input type="text" id="todo-input" placeholder="New task...">
             <button onclick="addTodo()" class="btn-add">+</button>
-            <ul id="task-list" class="text-left space-y-3"></ul>
+            <ul id="task-list" class="text-left space-y-3 w-full"></ul>
         </div>
 
-        <!-- Motivation -->
         <div class="card">
             <h2>Motivation</h2>
             <p id="quote" class="italic text-gray-500 text-lg leading-relaxed mt-4">"Success is built on small daily wins."</p>
@@ -208,7 +163,6 @@
     </footer>
 
     <script>
-      
         let timeLeft = 25 * 60;
         let timerId = null;
         const sessionsGoal = 4;
@@ -267,7 +221,7 @@
         }
 
         function getQuote() {
-            const quotes = ["Be better than yesterday.", "Focus on your goals.", "Keep going!"];
+            const quotes = ["Be better than yesterday.", "Focus on your goals.", "Success is a choice.", "Keep going!"];
             document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
         }
 
