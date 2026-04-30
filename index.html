@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Hub</title>
     <script src="https://tailwindcss.com"></script>
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         body {
             background-color: #0f172a !important;
@@ -147,7 +147,7 @@
         }
 
         input { 
-            border: 2px solid #e2e8f0; 
+            border: 2px solid #e2e880; 
             padding: 12px; 
             border-radius: 10px; 
             width: 100%; 
@@ -180,7 +180,7 @@
                     <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
                     <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
                 </svg>
-                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl">0%</div>
+                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl text-black">0%</div>
             </div>
             <p id="progress-detail">0/4 sessions done</p>
         </div>
@@ -249,47 +249,55 @@
             completed++;
             localStorage.setItem('sessionsCompleted', completed);
             renderCircle(completed);
-            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+            
+            // Streak celebration: only trigger big confetti on the 4th session
+            if (completed >= sessionsGoal) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
         }
 
         function renderCircle(completed) {
             const circle = document.getElementById('circle-bar');
             const percentText = document.getElementById('percent-text');
             const detailText = document.getElementById('progress-detail');
-            let percentage = Math.min((completed / sessionsGoal) * 100, 100);
-            const offset = 283 - (percentage / 100 * 283);
-            if(circle) circle.style.strokeDashoffset = offset;
-            if(percentText) percentText.innerText = `${Math.round(percentage)}%`;
-            if(detailText) detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
+            
+            const percentage = Math.min((completed / sessionsGoal) * 100, 100);
+            const offset = 283 - (283 * percentage / 100);
+            
+            circle.style.strokeDashoffset = offset;
+            percentText.innerText = `${Math.round(percentage)}%`;
+            detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
         }
+
+
+        updateTimerDisplay();
+        renderCircle(parseInt(localStorage.getItem('sessionsCompleted')) || 0);
 
         function addTodo() {
             const input = document.getElementById('todo-input');
-            const list = document.getElementById('task-list');
-            if (!input.value) return;
-            const li = document.createElement('li');
-            li.className = "flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-100";
-            li.innerHTML = `<span class="font-medium text-gray-700">${input.value}</span> <button onclick="this.parentElement.remove()" class="text-red-400 font-bold hover:text-red-600 transition">✕</button>`;
-            list.insertBefore(li, list.firstChild);
-            input.value = "";
+            if (input.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.innerText = input.value;
+                li.className = "p-2 border-b border-gray-200 text-gray-700";
+                document.getElementById('task-list').appendChild(li);
+                input.value = '';
+            }
         }
 
         function getQuote() {
             const quotes = [
-                "Never let anyone underestimate you. If you really want it, you can have it easily by working the best you can.",
-                "Just because it's hard doesn't mean it's impossible.",
-                "There is no failure, you either win or you learn.",
-                "Studying is hard but regret is harder.",
-                "Study until you are excited for the exam"
+                "Believe you can and you're halfway there.",
+                "The only way to do great work is to love what you do.",
+                "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+                "Don't watch the clock; do what it does. Keep going."
             ];
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('quote').innerText = `"${randomQuote}"`;
         }
-
-        window.onload = () => {
-            const completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
-            renderCircle(completed);
-        };
     </script>
 </body>
 </html>
