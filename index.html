@@ -188,7 +188,7 @@
         <!-- Pomodoro -->
         <div class="card">
             <h2>Pomodoro</h2>
-            <div id="time">15:00</div>
+            <div id="time">00:05</div>
             <div class="btn-group-row">
                 <button onclick="startTimer()" class="btn-timer btn-start">Start</button>
                 <button onclick="pauseTimer()" class="btn-timer btn-pause">Pause</button>
@@ -221,7 +221,7 @@
     let timerId = null;
     const sessionsGoal = 4;
 
-    function updateTimerDisplay() {
+    //function updateTimerDisplay() {
         const mins = Math.floor(timeLeft / 60);
         const secs = timeLeft % 60;
         const display = document.getElementById('time');
