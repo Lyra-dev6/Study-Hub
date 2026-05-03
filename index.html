@@ -290,21 +290,20 @@
     updateTimerDisplay();
     renderCircle(parseInt(localStorage.getItem('sessionsCompleted')) || 0);
 
-    
     function addTodo() {
         const input = document.getElementById('todo-input');
         const list = document.getElementById('task-list');
         
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
-            // Using flex to keep text left and button right
-            li.className = "flex justify-between items-center p-2 border-b border-gray-200 text-gray-700 w-full";
+            
+            li.className = "flex justify-between items-center p-2 border-b border-gray-100 text-gray-700 w-full group";
             
             li.innerHTML = `
-                <span>${input.value}</span>
+                <span class="flex-grow pr-4">${input.value}</span>
                 <button 
                     onclick="this.parentElement.remove()" 
-                    class="ml-2 text-red-500 hover:text-red-700 font-bold text-xl px-2"
+                    class="bg-red-300 hover:bg-red-400 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center transition-colors text-sm shadow-sm"
                 >
                     &times;
                 </button>
@@ -328,4 +327,3 @@
         if(quoteEl) quoteEl.innerText = `"${randomQuote}"`;
     }
 </script>
-
