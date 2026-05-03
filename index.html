@@ -287,16 +287,30 @@
         detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
     }
 
-
     updateTimerDisplay();
     renderCircle(parseInt(localStorage.getItem('sessionsCompleted')) || 0);
 
+    
     function addTodo() {
         const input = document.getElementById('todo-input');
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
-            li.innerText = input.value;
-            li.className = "p-2 border-b border-gray-200 text-gray-700";
+            
+            li.className = "flex justify-between items-center p-2 border-b border-gray-200 text-gray-700";
+            
+            
+            const taskText = document.createElement('span');
+            taskText.innerText = input.value;
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = '&times;'; // The "X" symbol
+            removeBtn.className = "ml-2 text-red-400 hover:text-red-600 font-bold text-xl px-2";
+            removeBtn.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(taskText);
+            li.appendChild(removeBtn);
             document.getElementById('task-list').appendChild(li);
             input.value = '';
         }
@@ -315,7 +329,3 @@
         if(quoteEl) quoteEl.innerText = `"${randomQuote}"`;
     }
 </script>
-
-    </script>
-</body>
-</html>
