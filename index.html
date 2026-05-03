@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Hub</title>
+    <title>Smart Task Motivator</title>
     <script src="https://tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
@@ -188,7 +188,7 @@
         <!-- Pomodoro -->
         <div class="card">
             <h2>Pomodoro</h2>
-            <div id="time">15:00</div>
+            <div id="time">5:00</div>
             <div class="btn-group-row">
                 <button onclick="startTimer()" class="btn-timer btn-start">Start</button>
                 <button onclick="pauseTimer()" class="btn-timer btn-pause">Pause</button>
@@ -217,7 +217,7 @@
     </footer>
 
       <script>
-    let timeLeft = 15 * 60; 
+    let timeLeft = 5 * 60; 
     let timerId = null;
     const sessionsGoal = 4;
 
