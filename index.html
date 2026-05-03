@@ -216,7 +216,7 @@
         <p class="text-white text-lg">Built with ✨ by <span class="font-bold">Aishah</span></p>
     </footer>
 
-    <script>
+        <script>
     let timeLeft = 15 * 60; 
     let timerId = null;
     const sessionsGoal = 4;
@@ -293,25 +293,24 @@
     
     function addTodo() {
         const input = document.getElementById('todo-input');
+        const list = document.getElementById('task-list');
+        
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
+            // Using flex to keep text left and button right
+            li.className = "flex justify-between items-center p-2 border-b border-gray-200 text-gray-700 w-full";
             
-            li.className = "flex justify-between items-center p-2 border-b border-gray-200 text-gray-700";
+            li.innerHTML = `
+                <span>${input.value}</span>
+                <button 
+                    onclick="this.parentElement.remove()" 
+                    class="ml-2 text-red-500 hover:text-red-700 font-bold text-xl px-2"
+                >
+                    &times;
+                </button>
+            `;
             
-            
-            const taskText = document.createElement('span');
-            taskText.innerText = input.value;
-            
-            const removeBtn = document.createElement('button');
-            removeBtn.innerHTML = '&times;'; // The "X" symbol
-            removeBtn.className = "ml-2 text-red-400 hover:text-red-600 font-bold text-xl px-2";
-            removeBtn.onclick = function() {
-                li.remove();
-            };
-
-            li.appendChild(taskText);
-            li.appendChild(removeBtn);
-            document.getElementById('task-list').appendChild(li);
+            list.appendChild(li);
             input.value = '';
         }
     }
@@ -329,3 +328,4 @@
         if(quoteEl) quoteEl.innerText = `"${randomQuote}"`;
     }
 </script>
+
