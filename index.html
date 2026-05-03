@@ -216,7 +216,7 @@
         <p class="text-white text-lg">Built with ✨ by <span class="font-bold">Aishah</span></p>
     </footer>
 
-       <script>
+      <script>
     let timeLeft = 15 * 60; 
     let timerId = null;
     const sessionsGoal = 4;
@@ -297,37 +297,34 @@
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
             
-            
+           
             li.style.display = "flex";
             li.style.justifyContent = "space-between";
             li.style.alignItems = "center";
             li.style.width = "100%";
-            li.style.padding = "12px 0";
+            li.style.padding = "10px 0";
             li.style.borderBottom = "1px solid #f1f5f9";
             li.style.color = "#475569";
 
             li.innerHTML = `
-                <span style="flex-grow: 1; text-align: left; padding-right: 15px; font-weight: 500;">${input.value}</span>
+                <span style="flex-grow: 1; text-align: left; padding-right: 10px;">${input.value}</span>
                 <button 
                     onclick="this.parentElement.remove()" 
                     style="
-                        background-color: #ff4d4d; 
-                        color: white; 
+                        background-color: #ef4444 !important; 
+                        color: white !important; 
                         border: none; 
-                        border-radius: 8px; 
-                        width: 30px; 
-                        height: 26px; 
+                        border-radius: 6px; 
+                        width: 28px; 
+                        height: 28px; 
                         display: flex; 
                         align-items: center; 
                         justify-content: center; 
                         cursor: pointer; 
                         font-weight: bold;
-                        font-size: 20px;
+                        font-size: 18px;
                         flex-shrink: 0;
-                        transition: transform 0.2s, background-color 0.2s;
                     "
-                    onmouseover="this.style.backgroundColor='#e63939'; this.style.transform='scale(1.1)'"
-                    onmouseout="this.style.backgroundColor='#ff4d4d'; this.style.transform='scale(1)'"
                 >
                     &times;
                 </button>
