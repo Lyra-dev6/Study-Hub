@@ -169,7 +169,7 @@
 </head>
 <body>
 
-    <h1 class="main-title">Study Hub</h1>
+    <h1 class="main-title">Smart Task Motivator</h1>
 
     <div id="container">
         <!-- Daily Goal -->
@@ -245,7 +245,7 @@
     }
 
     function pauseTimer() { clearInterval(timerId); timerId = null; }
-    function resetTimer() { pauseTimer(); timeLeft = 15 * 60; updateTimerDisplay(); }
+    function resetTimer() { pauseTimer(); timeLeft = 5 * 60; updateTimerDisplay(); }
 
     function updateProgress() {
         let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
