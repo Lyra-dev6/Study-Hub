@@ -297,13 +297,34 @@
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
             
-            li.className = "flex justify-between items-center p-2 border-b border-gray-100 text-gray-700 w-full group";
-            
+            li.style.display = "flex";
+            li.style.justifyContent = "space-between";
+            li.style.alignItems = "center";
+            li.style.width = "100%";
+            li.style.padding = "10px 0";
+            li.style.borderBottom = "1px solid #f1f5f9";
+            li.style.color = "#475569";
+
             li.innerHTML = `
-                <span class="flex-grow pr-4">${input.value}</span>
+                <span style="flex-grow: 1; text-align: left;">${input.value}</span>
                 <button 
                     onclick="this.parentElement.remove()" 
-                    class="bg-red-300 hover:bg-red-400 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center transition-colors text-sm shadow-sm"
+                    style="
+                        background-color: #FFB1B1; 
+                        color: white; 
+                        border: none; 
+                        border-radius: 50%; 
+                        width: 24px; 
+                        height: 24px; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        cursor: pointer; 
+                        font-weight: bold;
+                        font-size: 14px;
+                        margin-left: 10px;
+                        flex-shrink: 0;
+                    "
                 >
                     &times;
                 </button>
