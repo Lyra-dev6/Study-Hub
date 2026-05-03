@@ -216,7 +216,7 @@
         <p class="text-white text-lg">Built with ✨ by <span class="font-bold">Aishah</span></p>
     </footer>
 
-        <script>
+       <script>
     let timeLeft = 15 * 60; 
     let timerId = null;
     const sessionsGoal = 4;
@@ -297,34 +297,37 @@
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
             
+            
             li.style.display = "flex";
             li.style.justifyContent = "space-between";
             li.style.alignItems = "center";
             li.style.width = "100%";
-            li.style.padding = "10px 0";
+            li.style.padding = "12px 0";
             li.style.borderBottom = "1px solid #f1f5f9";
             li.style.color = "#475569";
 
             li.innerHTML = `
-                <span style="flex-grow: 1; text-align: left;">${input.value}</span>
+                <span style="flex-grow: 1; text-align: left; padding-right: 15px; font-weight: 500;">${input.value}</span>
                 <button 
                     onclick="this.parentElement.remove()" 
                     style="
-                        background-color: #FFB1B1; 
+                        background-color: #ff4d4d; 
                         color: white; 
                         border: none; 
-                        border-radius: 50%; 
-                        width: 24px; 
-                        height: 24px; 
+                        border-radius: 8px; 
+                        width: 30px; 
+                        height: 26px; 
                         display: flex; 
                         align-items: center; 
                         justify-content: center; 
                         cursor: pointer; 
                         font-weight: bold;
-                        font-size: 14px;
-                        margin-left: 10px;
+                        font-size: 20px;
                         flex-shrink: 0;
+                        transition: transform 0.2s, background-color 0.2s;
                     "
+                    onmouseover="this.style.backgroundColor='#e63939'; this.style.transform='scale(1.1)'"
+                    onmouseout="this.style.backgroundColor='#ff4d4d'; this.style.transform='scale(1)'"
                 >
                     &times;
                 </button>
