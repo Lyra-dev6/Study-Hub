@@ -11,7 +11,7 @@
 
 -Motivational Quotes: A generator that displays random inspirational quotes to maintain motivation during study breaks.
 
--Daily goals: This is a radial progress card which tracks users' sessions into 4 parts
+-Daily goals: This is a radial progress card which tracks users' sessions into 4 parts each session being 25 minutes.
 
 # What I Learned:
 -Card Sizing: Increasing card dimensions from 250x350px to 300x400px to fill space better.
