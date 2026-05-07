@@ -18,7 +18,7 @@
 
 -Font Size Adjustments: Scaling up h2 titles (24px to 30px), timer display (60px to 70px), quotes (20px to 24px), and buttons (16px to 18px).
 
--Title Positioning: Adding an h1 "Study Hub" element, styling it white and bold (60px), and adjusting margins (top 10px, bottom 10px) for centering.
+-Title Positioning: Adding an h1 "Smart Task Motivator" element, styling it (60px), and adjusting margins (top 10px, bottom 10px) for centering.
 
 -Layout Restructuring: Using flexbox on body (display: flex, flex-direction: column, justify-content: center) to center the title and cards vertically.
 
