@@ -19,9 +19,9 @@
         }
 
         .main-title {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 900;
-            margin-top: 50px;
+            margin-top: 30px;
             background: linear-gradient(to right, #AEC6CF, #D1BFF9, #FFD1DC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -33,20 +33,21 @@
             flex-direction: row;
             justify-content: center;
             align-items: stretch;
-            gap: 20px;
-            padding: 50px 20px;
+            gap: 15px;
+            padding: 30px 15px;
             width: 100%;
-            max-width: 1400px;
+            max-width: 1000px;
+            flex-wrap: wrap;
         }
 
         .card {
             background: white !important;
             color: #1a1a1a !important;
-            border-radius: 20px;
-            padding: 35px 25px;
+            border-radius: 15px;
+            padding: 25px 20px;
             flex: 1;
-            min-width: 250px;
-            min-height: 500px;
+            min-width: 220px;
+            min-height: 420px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
@@ -60,17 +61,17 @@
         }
 
         .card h2 {
-            font-size: 2.2rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #0f172a;
             text-align: center;
         }
 
         #time { 
-            font-size: 4.5rem; 
+            font-size: 3.5rem; 
             font-weight: 900; 
-            margin: 25px 0; 
+            margin: 20px 0; 
             color: #0f172a; 
             text-align: center;
         }
@@ -95,11 +96,11 @@
 
         .btn-timer {
             flex: 1;
-            padding: 12px 5px;
-            border-radius: 10px;
+            padding: 10px 5px;
+            border-radius: 8px;
             font-weight: bold;
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .btn-start { background-color: #AEC6CF !important; }
@@ -109,24 +110,26 @@
         .btn-add { 
             background-color: #D1BFF9 !important; 
             color: white; 
-            padding: 10px 30px; 
-            border-radius: 10px; 
+            padding: 8px 20px; 
+            border-radius: 8px; 
             font-weight: bold; 
-            margin-top: 10px;
+            margin-top: 8px;
+            font-size: 0.95rem;
         }
 
         .btn-quote { 
             background-color: #A0DEEE !important; 
             color: white; 
-            padding: 12px; 
-            border-radius: 10px; 
+            padding: 10px; 
+            border-radius: 8px; 
             width: 100%; 
             font-weight: bold; 
-            margin-top: auto; 
+            margin-top: auto;
+            font-size: 0.9rem;
         }
 
         #progress-detail, #quote {
-            font-size: 1.3rem !important;
+            font-size: 1.1rem !important;
             font-weight: 700 !important;
             color: #475569 !important;
             text-align: center;
@@ -135,8 +138,8 @@
         #progress-detail { margin-top: auto; }
         #quote { margin: auto; padding: 0 10px; }
 
-        .progress-container { position: relative; width: 110px; height: 110px; margin: 20px auto; }
-        svg { transform: rotate(-90deg); width: 110px; height: 110px; }
+        .progress-container { position: relative; width: 90px; height: 90px; margin: 15px auto; }
+        svg { transform: rotate(-90deg); width: 90px; height: 90px; }
         circle { fill: none; stroke-width: 10; stroke-linecap: round; }
         .bg-circle { stroke: #f1f5f9; }
         .progress-circle {
@@ -148,22 +151,124 @@
 
         input { 
             border: 2px solid #e2e880; 
-            padding: 12px; 
-            border-radius: 10px; 
+            padding: 10px; 
+            border-radius: 8px; 
             width: 100%; 
             box-sizing: border-box; 
             color: #333; 
             text-align: center;
+            font-size: 0.95rem;
         }
 
-        #task-list { width: 100%; margin-top: 20px; }
+        #task-list { width: 100%; margin-top: 15px; }
         
         footer {
             margin-top: auto;
-            padding: 40px;
+            padding: 30px;
             width: 100%;
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-title {
+                font-size: 2.5rem;
+                margin-top: 20px;
+            }
+
+            #container {
+                max-width: 900px;
+                gap: 12px;
+                padding: 25px 12px;
+            }
+
+            .card {
+                min-width: 200px;
+                min-height: 400px;
+                padding: 20px 15px;
+            }
+
+            #time {
+                font-size: 3rem;
+            }
+
+            .card h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+                margin-top: 15px;
+            }
+
+            #container {
+                max-width: 95%;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 10px;
+            }
+
+            .card {
+                min-width: 100%;
+                min-height: auto;
+                padding: 20px 15px;
+            }
+
+            #time {
+                font-size: 2.5rem;
+            }
+
+            .card h2 {
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+            }
+
+            .progress-container { width: 80px; height: 80px; margin: 10px auto; }
+            svg { width: 80px; height: 80px; }
+
+            footer {
+                padding: 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+                margin-top: 10px;
+            }
+
+            #container {
+                padding: 15px 8px;
+                gap: 10px;
+            }
+
+            .card {
+                padding: 15px 12px;
+                border-radius: 12px;
+            }
+
+            #time {
+                font-size: 2rem;
+                margin: 15px 0;
+            }
+
+            .card h2 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .btn-timer {
+                font-size: 0.75rem;
+                padding: 8px 3px;
+            }
+
+            .progress-container { width: 70px; height: 70px; }
+            svg { width: 70px; height: 70px; }
         }
     </style>
 </head>
@@ -183,7 +288,7 @@
         <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl text-black">0%</div>
     </div>
     <p id="progress-detail">0/4 sessions done</p>
-    <button onclick="resetProgress()" class="btn-quote" style="background-color: #FFB3BA !important; margin-top: auto; padding: 8px 0; font-size: 0.9rem;">Reset</button>
+    <button onclick="resetProgress()" class="btn-quote" style="background-color: #FFB3BA !important; margin-top: auto; padding: 6px 0; font-size: 0.85rem;">Reset</button>
 </div>
 
 
