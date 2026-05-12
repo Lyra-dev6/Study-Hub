@@ -47,7 +47,7 @@
             padding: 28px 20px;
             flex: 1;
             min-width: 0;
-            min-height: 480px;
+            min-height: 600px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
@@ -171,11 +171,40 @@
             font-size: 1rem;
         }
 
-        /* Responsive Design - Laptop/Desktop stays the same */
-        @media (max-width: 1400px) {
-            #container {
-                max-width: 1200px;
+        /* Ultra-wide/4K screens - scale up more */
+        @media (min-width: 1800px) {
+            .main-title {
+                font-size: 4rem;
             }
+
+            #container {
+                max-width: 1600px;
+                gap: 20px;
+                padding: 50px 20px;
+            }
+
+            .card {
+                min-height: 700px;
+                padding: 35px 25px;
+            }
+
+            .card h2 {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+            }
+
+            #time {
+                font-size: 4.5rem;
+                margin: 25px 0;
+            }
+
+            .btn-timer {
+                padding: 12px 5px;
+                font-size: 0.9rem;
+            }
+
+            .progress-container { width: 110px; height: 110px; margin: 20px auto; }
+            svg { width: 110px; height: 110px; }
         }
 
         /* Tablet - cards stack vertically */
