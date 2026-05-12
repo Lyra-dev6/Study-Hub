@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Task Motivator</title>
     <script src="https://tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://jsdelivr.net"></script>
     <style>
         body {
             background-color: #0f172a !important;
@@ -17,130 +17,128 @@
             align-items: center;
             min-height: 100vh;
         }
-
         .main-title {
             font-size: 3.2rem;
             font-weight: 900;
-            margin-top: 40px;
+            margin-top: 30px;
             background: linear-gradient(to right, #AEC6CF, #D1BFF9, #FFD1DC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -2px;
         }
-
         #container {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            align-items: stretch;
+            align-items: flex-start; 
             gap: 15px;
-            padding: 40px 15px;
+            padding: 20px 15px;
             width: 100%;
             max-width: 1300px;
             flex-wrap: nowrap;
         }
-
         .card {
             background: white !important;
             color: #1a1a1a !important;
             border-radius: 18px;
-            padding: 28px 20px;
+            padding: 20px 18px; 
             flex: 1;
             min-width: 0;
-            min-height: 540px;
+            min-height: 380px; 
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
-
         .card:hover {
-            transform: translateY(-15px) scale(1.05) !important;
+            transform: translateY(-10px) scale(1.02) !important;
             box-shadow: 0 30px 60px rgba(0,0,0,0.6) !important;
         }
-
         .card h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem; 
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #0f172a;
             text-align: center;
         }
-
-        #time { 
-            font-size: 3.8rem; 
-            font-weight: 900; 
-            margin: 20px 0; 
-            color: #0f172a; 
+        #time {
+            font-size: 3.2rem; 
+            font-weight: 900;
+            margin: 15px 0;
+            color: #0f172a;
             text-align: center;
         }
-
         button {
             cursor: pointer !important;
             border: none;
             transition: all 0.2s ease !important;
         }
-
         button:hover {
             filter: brightness(0.8) !important;
-            transform: scale(1.1) !important;
+            transform: scale(1.05) !important;
         }
-
         .btn-group-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             width: 100%;
             margin-top: auto;
         }
-
         .btn-timer {
             flex: 1;
-            padding: 11px 5px;
+            padding: 9px 4px;
             border-radius: 9px;
             font-weight: bold;
             color: white;
-            font-size: 0.88rem;
+            font-size: 0.8rem;
         }
-
         .btn-start { background-color: #AEC6CF !important; }
         .btn-pause { background-color: #FFD1DC !important; }
         .btn-reset { background-color: #B39EB5 !important; }
-
-        .btn-add { 
-            background-color: #D1BFF9 !important; 
-            color: white; 
-            padding: 9px 25px; 
-            border-radius: 9px; 
-            font-weight: bold; 
-            margin-top: 9px;
-            font-size: 0.92rem;
+        .btn-add {
+            background-color: #D1BFF9 !important;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 9px;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.85rem;
         }
-
-        .btn-quote { 
-            background-color: #A0DEEE !important; 
-            color: white; 
-            padding: 11px; 
-            border-radius: 9px; 
-            width: 100%; 
-            font-weight: bold; 
+        .btn-quote {
+            background-color: #A0DEEE !important;
+            color: white;
+            padding: 10px;
+            border-radius: 9px;
+            width: 100%;
+            font-weight: bold;
             margin-top: auto;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
         }
-
         #progress-detail, #quote {
-            font-size: 1.15rem !important;
+            font-size: 1rem !important;
             font-weight: 700 !important;
             color: #475569 !important;
             text-align: center;
         }
-
-        #progress-detail { margin-top: auto; }
-        #quote { margin: auto; padding: 0 10px; }
-
-        .progress-container { position: relative; width: 100px; height: 100px; margin: 18px auto; }
-        svg { transform: rotate(-90deg); width: 100px; height: 100px; }
-        circle { fill: none; stroke-width: 10; stroke-linecap: round; }
+        #progress-detail { margin-top: auto; margin-bottom: 10px; }
+        #quote { margin: auto; padding: 0 5px; }
+        
+        .progress-container {
+            position: relative;
+            width: 80px; 
+            height: 80px;
+            margin: 10px auto;
+        }
+        svg {
+            transform: rotate(-90deg);
+            width: 80px;
+            height: 80px;
+        }
+        circle {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
         .bg-circle { stroke: #f1f5f9; }
         .progress-circle {
             stroke: #936ED4;
@@ -148,126 +146,34 @@
             stroke-dashoffset: 283;
             transition: stroke-dashoffset 1s ease-in-out;
         }
-
-        input { 
-            border: 2px solid #e2e880; 
-            padding: 11px; 
-            border-radius: 9px; 
-            width: 100%; 
-            box-sizing: border-box; 
-            color: #333; 
+        input {
+            border: 2px solid #e2e8f0;
+            padding: 9px;
+            border-radius: 9px;
+            width: 100%;
+            box-sizing: border-box;
+            color: #333;
             text-align: center;
-            font-size: 0.92rem;
+            font-size: 0.85rem;
         }
-
-        #task-list { width: 100%; margin-top: 15px; }
-        
+        #task-list {
+            width: 100%;
+            margin-top: 10px;
+            overflow-y: auto; 
+            max-height: 150px;
+        }
         footer {
             margin-top: auto;
-            padding: 35px;
+            padding: 20px;
             width: 100%;
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            font-size: 1rem;
         }
 
-        /* Ultra-wide/4K screens - scale up more */
-        @media (min-width: 1800px) {
-            .main-title {
-                font-size: 4rem;
-            }
-
-            #container {
-                max-width: 1600px;
-                gap: 20px;
-                padding: 50px 20px;
-            }
-
-            .card {
-                min-height: 700px;
-                padding: 35px 25px;
-            }
-
-            .card h2 {
-                font-size: 2.2rem;
-                margin-bottom: 20px;
-            }
-
-            #time {
-                font-size: 4.5rem;
-                margin: 25px 0;
-            }
-
-            .btn-timer {
-                padding: 12px 5px;
-                font-size: 0.9rem;
-            }
-
-            .progress-container { width: 110px; height: 110px; margin: 20px auto; }
-            svg { width: 110px; height: 110px; }
-        }
-
-        /* Tablet - cards stack vertically */
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
-                margin-top: 20px;
-            }
-
-            #container {
-                flex-direction: column;
-                max-width: 95%;
-                gap: 15px;
-                padding: 20px 10px;
-            }
-
-            .card {
-                min-width: 100%;
-                min-height: auto;
-                padding: 20px 15px;
-            }
-
-            #time {
-                font-size: 2.5rem;
-            }
-
-            .card h2 {
-                font-size: 1.3rem;
-            }
-
-            .progress-container { width: 80px; height: 80px; }
-            svg { width: 80px; height: 80px; }
-        }
-
-        /* Mobile */
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.5rem;
-                margin-top: 10px;
-            }
-
-            #container {
-                padding: 15px 8px;
-            }
-
-            .card {
-                padding: 15px 12px;
-            }
-
-            #time {
-                font-size: 2rem;
-            }
-
-            .card h2 {
-                font-size: 1.1rem;
-            }
-
-            .btn-timer {
-                font-size: 0.75rem;
-            }
-
-            .progress-container { width: 70px; height: 70px; }
-            svg { width: 70px; height: 70px; }
+            #container { flex-direction: column; align-items: center; }
+            .card { min-width: 90%; min-height: auto; }
+            .main-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -277,19 +183,18 @@
 
     <div id="container">
         <!-- Daily Goal -->
-<div class="card">
-    <h2>Daily Goal</h2>
-    <div class="progress-container">
-        <svg viewBox="0 0 100 100">
-            <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
-            <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
-        </svg>
-        <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl text-black">0%</div>
-    </div>
-    <p id="progress-detail">0/4 sessions done</p>
-    <button onclick="resetProgress()" class="btn-quote" style="background-color: #FFB3BA !important; margin-top: auto; padding: 7px 0; font-size: 0.85rem;">Reset</button>
-</div>
-
+        <div class="card">
+            <h2>Daily Goal</h2>
+            <div class="progress-container">
+                <svg viewBox="0 0 100 100">
+                    <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
+                    <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-lg text-black">0%</div>
+            </div>
+            <p id="progress-detail">0/4 sessions done</p>
+            <button onclick="resetProgress()" class="btn-quote" style="background-color: #FFB3BA !important; margin-top: 10px; padding: 5px 0; font-size: 0.8rem;">Reset</button>
+        </div>
 
         <!-- Pomodoro -->
         <div class="card">
@@ -307,154 +212,123 @@
             <h2>To-do List</h2>
             <input type="text" id="todo-input" placeholder="New task...">
             <button onclick="addTodo()" class="btn-add">+</button>
-            <ul id="task-list" class="text-left space-y-3 w-full"></ul>
+            <ul id="task-list" class="text-left space-y-2 w-full"></ul>
         </div>
 
         <!-- Motivation -->
         <div class="card">
             <h2>Motivation</h2>
-            <p id="quote">"Never let anyone underestimate you. If you really want it, you can have it easily by working the best you can."</p>
+            <p id="quote">"Never let anyone underestimate you. If you really want it, you can have it easily."</p>
             <button onclick="getQuote()" class="btn-quote">New Quote</button>
         </div>
     </div>
 
     <footer>
-        <p class="text-white text-lg">Built with ✨ by <span class="font-bold">Aishah</span></p>
+        <p class="text-white text-md">Built with ✨ by <span class="font-bold">Aishah</span></p>
     </footer>
 
-      <script>
-    let timeLeft = 5 * 60; 
-    let timerId = null;
-    const sessionsGoal = 4;
+    <script>
+        let timeLeft = 5 * 60;
+        let timerId = null;
+        const sessionsGoal = 4;
 
-    function updateTimerDisplay() {
-       const mins = Math.floor(timeLeft / 60);
-       const secs = timeLeft % 60;
-       const display = document.getElementById('time');
-       if(display) {
-           display.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
-       }
-    }
-
-    function startTimer() {
-        if (timerId) return;
-        timerId = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay();
-            if (timeLeft <= 0) {
-                clearInterval(timerId);
-                timerId = null;
-                updateProgress();
-                alert("Time is up! Session complete.");
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            const display = document.getElementById('time');
+            if(display) {
+                display.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
             }
-        }, 1000);
-    }
+        }
 
-    function pauseTimer() { clearInterval(timerId); timerId = null; }
-    function resetTimer() { pauseTimer(); timeLeft = 5 * 60; updateTimerDisplay(); }
+        function startTimer() {
+            if (timerId) return;
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    updateProgress();
+                    alert("Time is up! Session complete.");
+                }
+            }, 1000);
+        }
 
-    function updateProgress() {
-        let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
-        completed++;
-        localStorage.setItem('sessionsCompleted', completed);
-        renderCircle(completed);
-        
-        const count = 200;
-        const defaults = { origin: { y: 0.7 } };
+        function pauseTimer() {
+            clearInterval(timerId);
+            timerId = null;
+        }
 
-        function fire(particleRatio, opts) {
+        function resetTimer() {
+            pauseTimer();
+            timeLeft = 5 * 60;
+            updateTimerDisplay();
+        }
+
+        function updateProgress() {
+            let completed = parseInt(localStorage.getItem('sessionsCompleted')) || 0;
+            completed++;
+            localStorage.setItem('sessionsCompleted', completed);
+            renderCircle(completed);
+            
             confetti({
-                ...defaults,
-                ...opts,
-                particleCount: Math.floor(count * particleRatio)
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
             });
         }
 
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2, { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1, { spread: 120, startVelocity: 45 });
-    }
-
-    function resetProgress() {
-        localStorage.removeItem('sessionsCompleted');
-        renderCircle(0);
-    }
-
-    function renderCircle(completed) {
-        const circle = document.getElementById('circle-bar');
-        const percentText = document.getElementById('percent-text');
-        const detailText = document.getElementById('progress-detail');
-        
-        if(!circle || !percentText || !detailText) return;
-
-        const percentage = Math.min((completed / sessionsGoal) * 100, 100);
-        const offset = 283 - (283 * percentage / 100);
-        
-        circle.style.strokeDashoffset = offset;
-        percentText.innerText = `${Math.round(percentage)}%`;
-        detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
-    }
-
-    updateTimerDisplay();
-    renderCircle(parseInt(localStorage.getItem('sessionsCompleted')) || 0);
-
-    function addTodo() {
-        const input = document.getElementById('todo-input');
-        const list = document.getElementById('task-list');
-        
-        if (input && input.value.trim() !== '') {
-            const li = document.createElement('li');
-            
-            li.style.display = "flex";
-            li.style.justifyContent = "space-between";
-            li.style.alignItems = "center";
-            li.style.width = "100%";
-            li.style.padding = "10px 0";
-            li.style.borderBottom = "1px solid #f1f5f9";
-            li.style.color = "#475569";
-
-            li.innerHTML = `
-                <span style="flex-grow: 1; text-align: left; padding-right: 10px;">${input.value}</span>
-                <button 
-                    onclick="this.parentElement.remove()" 
-                    style="
-                        background-color: #ef4444 !important; 
-                        color: white !important; 
-                        border: none; 
-                        border-radius: 6px; 
-                        width: 28px; 
-                        height: 28px; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: center; 
-                        cursor: pointer; 
-                        font-weight: bold;
-                        font-size: 18px;
-                        flex-shrink: 0;
-                    "
-                >
-                    &times;
-                </button>
-            `;
-            
-            list.appendChild(li);
-            input.value = '';
+        function resetProgress() {
+            localStorage.removeItem('sessionsCompleted');
+            renderCircle(0);
         }
-    }
 
-    function getQuote() {
-        const quotes = [
-            "Believe you can and you're halfway there.",
-            "The only way to do great work is to love what you do.",
-            "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-            "Don't watch the clock; do what it does. Keep going.",
-            "Unless you really want it, you'll work the best you can to achieve it.",
-        ];
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        const quoteEl = document.getElementById('quote');
-        if(quoteEl) quoteEl.innerText = `"${randomQuote}"`;
-    }
-</script>
+        function renderCircle(completed) {
+            const circle = document.getElementById('circle-bar');
+            const percentText = document.getElementById('percent-text');
+            const detailText = document.getElementById('progress-detail');
+            if(!circle || !percentText || !detailText) return;
+            
+            const percentage = Math.min((completed / sessionsGoal) * 100, 100);
+            const offset = 283 - (283 * percentage / 100);
+            circle.style.strokeDashoffset = offset;
+            percentText.innerText = `${Math.round(percentage)}%`;
+            detailText.innerText = `${completed}/${sessionsGoal} sessions done`;
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const list = document.getElementById('task-list');
+            if (input && input.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.className = "flex justify-between items-center w-full py-1 border-b border-slate-100 text-slate-600";
+                li.innerHTML = `
+                    <span class="flex-grow text-left text-sm">${input.value}</span>
+                    <button onclick="this.parentElement.remove()" class="bg-red-500 text-white rounded-md w-6 h-6 flex items-center justify-center font-bold text-lg">&times;</button>
+                `;
+                list.appendChild(li);
+                input.value = '';
+            }
+        }
+
+        function getQuote() {
+            const quotes = [
+                "Believe you can and you're halfway there.",
+                "The only way to do great work is to love what you do.",
+                "Success is not final, failure is not fatal.",
+                "Don't watch the clock; do what it does. Keep going.",
+                "Focus on being productive instead of busy."
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            const quoteEl = document.getElementById('quote');
+            if(quoteEl) quoteEl.innerText = `"${randomQuote}"`;
+        }
+
+        updateTimerDisplay();
+        renderCircle(parseInt(localStorage.getItem('sessionsCompleted')) || 0);
+    </script>
+</body>
+</html>
+
 
