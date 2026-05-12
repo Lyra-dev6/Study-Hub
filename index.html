@@ -173,17 +173,19 @@
 
     <div id="container">
         <!-- Daily Goal -->
-        <div class="card">
-            <h2>Daily Goal</h2>
-            <div class="progress-container">
-                <svg viewBox="0 0 100 100">
-                    <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
-                    <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
-                </svg>
-                <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl text-black">0%</div>
-            </div>
-            <p id="progress-detail">0/4 sessions done</p>
-        </div>
+<div class="card">
+    <h2>Daily Goal</h2>
+    <div class="progress-container">
+        <svg viewBox="0 0 100 100">
+            <circle class="bg-circle" cx="50" cy="50" r="45"></circle>
+            <circle class="progress-circle" id="circle-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div id="percent-text" class="absolute inset-0 flex items-center justify-center font-black text-xl text-black">0%</div>
+    </div>
+    <p id="progress-detail">0/4 sessions done</p>
+    <button onclick="resetProgress()" class="btn-quote" style="background-color: #FFB3BA !important; margin-top: auto; padding: 8px 0; font-size: 0.9rem;">Reset</button>
+</div>
+
 
         <!-- Pomodoro -->
         <div class="card">
@@ -226,8 +228,8 @@
        const secs = timeLeft % 60;
        const display = document.getElementById('time');
        if(display) {
-       display.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
+           display.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
+       }
     }
 
     function startTimer() {
@@ -269,7 +271,11 @@
         fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
         fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
         fire(0.1, { spread: 120, startVelocity: 45 });
-        
+    }
+
+    function resetProgress() {
+        localStorage.removeItem('sessionsCompleted');
+        renderCircle(0);
     }
 
     function renderCircle(completed) {
@@ -297,7 +303,6 @@
         if (input && input.value.trim() !== '') {
             const li = document.createElement('li');
             
-           
             li.style.display = "flex";
             li.style.justifyContent = "space-between";
             li.style.alignItems = "center";
