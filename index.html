@@ -7,6 +7,9 @@
     <script src="https://tailwindcss.com"></script>
     <script src="https://jsdelivr.net"></script>
     <style>
+        html {
+            height: 100%;
+        }
         body {
             background-color: #0f172a !important;
             color: white;
@@ -15,14 +18,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
+            height: 100%;
         }
         .main-title {
             font-size: 3.2rem;
             font-weight: 900;
             margin-top: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 0;
             background: linear-gradient(to right, #AEC6CF, #D1BFF9, #FFD1DC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -37,8 +40,8 @@
             padding: 20px 15px;
             width: 100%;
             max-width: 1300px;
-            flex-wrap: nowrap;
             flex: 1;
+            margin: auto 0;
         }
         .card {
             background: white !important;
@@ -201,11 +204,11 @@
             max-height: 150px;
         }
         footer {
-            margin-top: auto;
             padding: 20px;
             width: 100%;
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
+            margin-top: auto;
         }
 
         @media (max-width: 768px) {
