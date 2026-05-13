@@ -15,12 +15,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
         }
         .main-title {
             font-size: 3.2rem;
             font-weight: 900;
             margin-top: 30px;
+            margin-bottom: 30px;
             background: linear-gradient(to right, #AEC6CF, #D1BFF9, #FFD1DC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -36,6 +38,7 @@
             width: 100%;
             max-width: 1300px;
             flex-wrap: nowrap;
+            flex: 1;
         }
         .card {
             background: white !important;
@@ -114,6 +117,25 @@
             margin-top: auto;
             font-size: 0.85rem;
         }
+        .btn-delete {
+            background-color: #EF4444 !important;
+            color: white;
+            padding: 0;
+            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn-delete:hover {
+            filter: brightness(0.85) !important;
+            transform: scale(1.15) !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
         #progress-detail, #quote {
             font-size: 1rem !important;
             font-weight: 700 !important;
@@ -155,6 +177,22 @@
             color: #333;
             text-align: center;
             font-size: 0.85rem;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            text-slate-600;
+            gap: 8px;
+        }
+        .task-text {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 0.85rem;
+            word-break: break-word;
         }
         #task-list {
             width: 100%;
@@ -212,7 +250,7 @@
             <h2>To-do List</h2>
             <input type="text" id="todo-input" placeholder="New task...">
             <button onclick="addTodo()" class="btn-add">+</button>
-            <ul id="task-list" class="text-left space-y-2 w-full"></ul>
+            <ul id="task-list" class="w-full"></ul>
         </div>
 
         <!-- Motivation -->
@@ -302,10 +340,10 @@
             const list = document.getElementById('task-list');
             if (input && input.value.trim() !== '') {
                 const li = document.createElement('li');
-                li.className = "flex justify-between items-center w-full py-1 border-b border-slate-100 text-slate-600";
+                li.className = "task-item";
                 li.innerHTML = `
-                    <span class="flex-grow text-left text-sm">${input.value}</span>
-                    <button onclick="this.parentElement.remove()" class="bg-red-500 text-white rounded-md w-6 h-6 flex items-center justify-center font-bold text-lg">&times;</button>
+                    <span class="task-text">${input.value}</span>
+                    <button onclick="this.parentElement.remove()" class="btn-delete">&times;</button>
                 `;
                 list.appendChild(li);
                 input.value = '';
@@ -330,5 +368,3 @@
     </script>
 </body>
 </html>
-
-
