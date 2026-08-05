@@ -1,4 +1,8 @@
 # Study Hub:
+
+-## 🏆 Award Winner
+This project was entered into a school-wide computer science competition and won **1st Place**! It was judged on its utility, clean user experience, and practical features for students.
+
 - A centralized student productivity platform designed to streamline focused study sessions, tasks to be completed, and some motivation. Project #3 in my web development journey.
 
 # Overview: 
